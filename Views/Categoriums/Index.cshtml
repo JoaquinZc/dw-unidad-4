@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Unidad4.Models.Categorium>
+
+@{
+    ViewData["Title"] = "Categorias";
+}
+
+<h1>Categorias</h1>
+
+<p>
+    <a asp-action="Create">Crear nuevo</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Identificador)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FechaRegistro)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estado)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var (value, i) in Model.Select((value, i) => (value, i)))
+        {
+            <tr class="@(i%3 == 0 ? "table-primary" : i%3 == 1 ? "table-danger" : "table-warning")">
+                <td>
+                    @Html.DisplayFor(modelItem => value.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => value.Identificador)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => value.Descripcion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => value.FechaRegistro)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => value.Estado)
+                </td>
+                <td>
+                    <div class="btn-group" role="group" aria-label="Opciones de item">
+                        <a asp-action="Edit" asp-route-id="@value.IdCategoria" class="btn btn-outline-primary btn-sm"><i class="fa fa-pen"></i> Editar</a>
+                        <a asp-action="Details" asp-route-id="@value.IdCategoria" class="btn btn-outline-info btn-sm"><i class="fa fa-info"></i> Detalle</a>
+                        <a asp-action="Delete" asp-route-id="@value.IdCategoria" class="btn btn-outline-danger btn-sm"><i class="fa fa-trash"></i> Eliminar</a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
